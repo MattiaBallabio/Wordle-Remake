@@ -1,5 +1,6 @@
 import random
 import os
+import time
 
 #Game title, design-related purpose
 def title():
@@ -70,7 +71,7 @@ while True:
   while True:
     if len(guess) != 5:
       print("The word is supposed to be 5 letters long.")
-      guess = guessWord()
+      guessWord()
     else:
       break
   
@@ -131,3 +132,6 @@ while True:
           break
     case False:
       pass
+
+print("Thank you for playing!")
+time.sleep(1)

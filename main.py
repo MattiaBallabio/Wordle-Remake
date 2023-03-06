@@ -3,12 +3,19 @@ import random
 #Game title, design-related purpose
 def title():
   print('''
-██╗    ██╗ ██████╗ ██████╗ ██████╗ ██╗     ███████╗    ██████╗ ███████╗███╗   ███╗ █████╗ ██╗  ██╗███████╗
-██║    ██║██╔═══██╗██╔══██╗██╔══██╗██║     ██╔════╝    ██╔══██╗██╔════╝████╗ ████║██╔══██╗██║ ██╔╝██╔════╝
-██║ █╗ ██║██║   ██║██████╔╝██║  ██║██║     █████╗      ██████╔╝█████╗  ██╔████╔██║███████║█████╔╝ █████╗  
-██║███╗██║██║   ██║██╔══██╗██║  ██║██║     ██╔══╝      ██╔══██╗██╔══╝  ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝  
-╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝███████╗███████╗    ██║  ██║███████╗██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗
- ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+██╗    ██╗ ██████╗ ██████╗ ██████╗ ██╗     ███████╗
+██║    ██║██╔═══██╗██╔══██╗██╔══██╗██║     ██╔════╝
+██║ █╗ ██║██║   ██║██████╔╝██║  ██║██║     █████╗  
+██║███╗██║██║   ██║██╔══██╗██║  ██║██║     ██╔══╝  
+╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝███████╗███████╗
+ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝
+
+██████╗ ███████╗███╗   ███╗ █████╗ ██╗  ██╗███████╗
+██╔══██╗██╔════╝████╗ ████║██╔══██╗██║ ██╔╝██╔════╝
+██████╔╝█████╗  ██╔████╔██║███████║█████╔╝ █████╗ 
+██╔══██╗██╔══╝  ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝ 
+██║  ██║███████╗██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗
+╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
   ''')
 
 #Input used to ask the user for a guess
@@ -47,9 +54,8 @@ gameWordList.extend(gameWord)
 for letter in gameWordList:
   shownGameWord += "[ " + letter + " ] "
 
-#NEEDS TO BE REPLACED WITH BLANK LETTERS
-#WHEN GAME IS COMPLETED
-print(shownGameWord)
+#Word to guess starts as 5 blank squares
+print("[*] [*] [*] [*] [*]")
 
 #Dividing the word into other variables
 l1, l2, l3, l4, l5 = gameWordList
@@ -70,33 +76,41 @@ while True:
   guessList.extend(guess)
 #Dividing the guess into 5 variables
   g1, g2, g3, g4, g5 = guessList
-  
-#enumerate() was used to keep track of the position of the letter in the for loop
-  for i, letter in enumerate(guessList):
-    if letter == g1:
-      guessList[i] = l1
-    elif letter == g2:
-      guessList[i] = l2
-    elif letter == g3:
-      guessList[i] = l3
-    elif letter == g4:
-      guessList[i] = l4
-    elif letter == g5:
-      guessList[i] = l5
-    if letter == gameWordList[i]:
-  	  guessList[i] = green + letter + white
 
-  '''
-  for i, letter in enumerate(guessList):
-    if letter in (l1, l2, l3, l4, l5):
-      letter = guessList[i]
-      guessList[i] = yellow + letter + white
-  '''
+#Check if letter is in word
+  if g1 in gameWordList and g1 != l1:
+      g1 = yellow + g1 + white
+  if g2 in gameWordList and g2 != l2:
+      g2 = yellow + g2 + white
+  if g3 in gameWordList and g3 != l3:
+      g3 = yellow + g3 + white
+  if g4 in gameWordList and g4 != l4:
+      g4 = yellow + g4 + white
+  if g5 in gameWordList and g5 != l5:
+      g5 = yellow + g5 + white
+
+  guessList.clear()
+
+#Check if letter is in right place
+  if g1 == l1:
+    g1 = green + g1 + white
+  if g2 == l2:
+    g2 = green + g2 + white
+  if g3 == l3:
+    g3 = green + g3 + white
+  if g4 == l4:
+    g4 = green + g4 + white
+  if g5 == l5:
+    g5 = green + g5 + white
+
+  guessList = [g1, g2, g3, g4, g5]
+  
   for letter in guessList:
   	shownGuess += "[ " + letter + " ] "
   	
   print(shownGuess)
   guessList.clear()
+  shownGuess = ""
 
   match win:
     case True:

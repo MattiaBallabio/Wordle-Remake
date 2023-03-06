@@ -1,4 +1,5 @@
 import random
+import os
 
 #Game title, design-related purpose
 def title():
@@ -107,13 +108,26 @@ while True:
   
   for letter in guessList:
   	shownGuess += "[ " + letter + " ] "
-  	
+
+#Check if player has guessed the word
+  if guessList == [green + l1 + white, green + l2 + white, green + l3 + white, green + l4 + white, green + l5 + white]:
+    win = True
+  
   print(shownGuess)
   guessList.clear()
   shownGuess = ""
 
   match win:
     case True:
-      break
+      print("You won")
+      again = input("Would you like to play again?\nType Y to play a new game or press Enter to\nclose the program.\n").upper()
+      match again:
+        case "Y":
+          os.system("clear")
+          title()
+          print("[*] [*] [*] [*] [*]")
+          pass
+        case other:
+          break
     case False:
       pass
